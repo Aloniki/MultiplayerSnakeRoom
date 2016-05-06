@@ -74,7 +74,7 @@ bool Sender::send(R2SSignal singal){
             break;
         }
         c_packet += wCount;
-        rCount -= wCount++;
+        rCount -= wCount;
     }
     return true;
 }
