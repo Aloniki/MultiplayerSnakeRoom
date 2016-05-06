@@ -1,0 +1,357 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18BA741B1CDB2DD80039FF61 /* MainRoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA741A1CDB2DD80039FF61 /* MainRoom.cpp */; };
+		18BA745B1CDB301C0039FF61 /* DataPacketProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA74491CDB301B0039FF61 /* DataPacketProtocol.cpp */; };
+		18BA745C1CDB301C0039FF61 /* Handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA744C1CDB301B0039FF61 /* Handler.cpp */; };
+		18BA745D1CDB301C0039FF61 /* IWSingleRoleThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA744E1CDB301B0039FF61 /* IWSingleRoleThread.cpp */; };
+		18BA745E1CDB301C0039FF61 /* JsonManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA74501CDB301B0039FF61 /* JsonManager.cpp */; };
+		18BA74611CDB301C0039FF61 /* Receiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA74551CDB301C0039FF61 /* Receiver.cpp */; };
+		18BA74621CDB301C0039FF61 /* RoomInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA74571CDB301C0039FF61 /* RoomInfo.cpp */; };
+		18BA74631CDB301C0039FF61 /* ServerDaemon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA74591CDB301C0039FF61 /* ServerDaemon.cpp */; };
+		18C0C2BB1CDC468E0067D65B /* Sender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C0C2B91CDC468E0067D65B /* Sender.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		18BA74151CDB2DD80039FF61 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		18BA74171CDB2DD80039FF61 /* GameRoom */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameRoom; sourceTree = BUILT_PRODUCTS_DIR; };
+		18BA741A1CDB2DD80039FF61 /* MainRoom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MainRoom.cpp; sourceTree = "<group>"; };
+		18BA74491CDB301B0039FF61 /* DataPacketProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataPacketProtocol.cpp; sourceTree = "<group>"; };
+		18BA744A1CDB301B0039FF61 /* DataPacketProtocol.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DataPacketProtocol.hpp; sourceTree = "<group>"; };
+		18BA744B1CDB301B0039FF61 /* GameHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameHeaders.h; sourceTree = "<group>"; };
+		18BA744C1CDB301B0039FF61 /* Handler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Handler.cpp; sourceTree = "<group>"; };
+		18BA744D1CDB301B0039FF61 /* Handler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Handler.hpp; sourceTree = "<group>"; };
+		18BA744E1CDB301B0039FF61 /* IWSingleRoleThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IWSingleRoleThread.cpp; sourceTree = "<group>"; };
+		18BA744F1CDB301B0039FF61 /* IWSingleRoleThread.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IWSingleRoleThread.hpp; sourceTree = "<group>"; };
+		18BA74501CDB301B0039FF61 /* JsonManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonManager.cpp; sourceTree = "<group>"; };
+		18BA74511CDB301B0039FF61 /* JsonManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JsonManager.hpp; sourceTree = "<group>"; };
+		18BA74551CDB301C0039FF61 /* Receiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Receiver.cpp; sourceTree = "<group>"; };
+		18BA74561CDB301C0039FF61 /* Receiver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Receiver.hpp; sourceTree = "<group>"; };
+		18BA74571CDB301C0039FF61 /* RoomInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoomInfo.cpp; sourceTree = "<group>"; };
+		18BA74581CDB301C0039FF61 /* RoomInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RoomInfo.hpp; sourceTree = "<group>"; };
+		18BA74591CDB301C0039FF61 /* ServerDaemon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerDaemon.cpp; sourceTree = "<group>"; };
+		18BA745A1CDB301C0039FF61 /* ServerDaemon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ServerDaemon.hpp; sourceTree = "<group>"; };
+		18C0C2B91CDC468E0067D65B /* Sender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sender.cpp; sourceTree = "<group>"; };
+		18C0C2BA1CDC468E0067D65B /* Sender.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sender.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18BA74141CDB2DD80039FF61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18BA740E1CDB2DD80039FF61 = {
+			isa = PBXGroup;
+			children = (
+				18BA74191CDB2DD80039FF61 /* GameRoom */,
+				18BA74181CDB2DD80039FF61 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		18BA74181CDB2DD80039FF61 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18BA74171CDB2DD80039FF61 /* GameRoom */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18BA74191CDB2DD80039FF61 /* GameRoom */ = {
+			isa = PBXGroup;
+			children = (
+				18BA744B1CDB301B0039FF61 /* GameHeaders.h */,
+				18C0C2B81CDC46810067D65B /* Sender */,
+				18BA741A1CDB2DD80039FF61 /* MainRoom.cpp */,
+				18BA74661CDB310D0039FF61 /* Daemon */,
+				18BA74641CDB30380039FF61 /* ProtocolManagers */,
+				18C0C2B71CDC465C0067D65B /* Entity */,
+			);
+			path = GameRoom;
+			sourceTree = "<group>";
+		};
+		18BA74641CDB30380039FF61 /* ProtocolManagers */ = {
+			isa = PBXGroup;
+			children = (
+				18BA74491CDB301B0039FF61 /* DataPacketProtocol.cpp */,
+				18BA744A1CDB301B0039FF61 /* DataPacketProtocol.hpp */,
+				18BA74501CDB301B0039FF61 /* JsonManager.cpp */,
+				18BA74511CDB301B0039FF61 /* JsonManager.hpp */,
+			);
+			name = ProtocolManagers;
+			sourceTree = "<group>";
+		};
+		18BA74661CDB310D0039FF61 /* Daemon */ = {
+			isa = PBXGroup;
+			children = (
+				18BA74591CDB301C0039FF61 /* ServerDaemon.cpp */,
+				18BA745A1CDB301C0039FF61 /* ServerDaemon.hpp */,
+				18BA74671CDB31250039FF61 /* IWSingleRoleThread */,
+				18BA744E1CDB301B0039FF61 /* IWSingleRoleThread.cpp */,
+				18BA744F1CDB301B0039FF61 /* IWSingleRoleThread.hpp */,
+				18BA74691CDB31410039FF61 /* Receiver */,
+				18BA74681CDB31390039FF61 /* Handler */,
+			);
+			name = Daemon;
+			sourceTree = "<group>";
+		};
+		18BA74671CDB31250039FF61 /* IWSingleRoleThread */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = IWSingleRoleThread;
+			sourceTree = "<group>";
+		};
+		18BA74681CDB31390039FF61 /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				18BA744C1CDB301B0039FF61 /* Handler.cpp */,
+				18BA744D1CDB301B0039FF61 /* Handler.hpp */,
+			);
+			name = Handler;
+			sourceTree = "<group>";
+		};
+		18BA74691CDB31410039FF61 /* Receiver */ = {
+			isa = PBXGroup;
+			children = (
+				18BA74551CDB301C0039FF61 /* Receiver.cpp */,
+				18BA74561CDB301C0039FF61 /* Receiver.hpp */,
+			);
+			name = Receiver;
+			sourceTree = "<group>";
+		};
+		18C0C2B71CDC465C0067D65B /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				18BA74571CDB301C0039FF61 /* RoomInfo.cpp */,
+				18BA74581CDB301C0039FF61 /* RoomInfo.hpp */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
+		18C0C2B81CDC46810067D65B /* Sender */ = {
+			isa = PBXGroup;
+			children = (
+				18C0C2B91CDC468E0067D65B /* Sender.cpp */,
+				18C0C2BA1CDC468E0067D65B /* Sender.hpp */,
+			);
+			name = Sender;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18BA74161CDB2DD80039FF61 /* GameRoom */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18BA741E1CDB2DD80039FF61 /* Build configuration list for PBXNativeTarget "GameRoom" */;
+			buildPhases = (
+				18BA74131CDB2DD80039FF61 /* Sources */,
+				18BA74141CDB2DD80039FF61 /* Frameworks */,
+				18BA74151CDB2DD80039FF61 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GameRoom;
+			productName = GameRoom;
+			productReference = 18BA74171CDB2DD80039FF61 /* GameRoom */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18BA740F1CDB2DD80039FF61 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Aloniki's Study";
+				TargetAttributes = {
+					18BA74161CDB2DD80039FF61 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 18BA74121CDB2DD80039FF61 /* Build configuration list for PBXProject "GameRoom" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 18BA740E1CDB2DD80039FF61;
+			productRefGroup = 18BA74181CDB2DD80039FF61 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18BA74161CDB2DD80039FF61 /* GameRoom */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18BA74131CDB2DD80039FF61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18BA741B1CDB2DD80039FF61 /* MainRoom.cpp in Sources */,
+				18BA745E1CDB301C0039FF61 /* JsonManager.cpp in Sources */,
+				18BA74631CDB301C0039FF61 /* ServerDaemon.cpp in Sources */,
+				18BA74611CDB301C0039FF61 /* Receiver.cpp in Sources */,
+				18C0C2BB1CDC468E0067D65B /* Sender.cpp in Sources */,
+				18BA745C1CDB301C0039FF61 /* Handler.cpp in Sources */,
+				18BA74621CDB301C0039FF61 /* RoomInfo.cpp in Sources */,
+				18BA745B1CDB301C0039FF61 /* DataPacketProtocol.cpp in Sources */,
+				18BA745D1CDB301C0039FF61 /* IWSingleRoleThread.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		18BA741C1CDB2DD80039FF61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = /usr/inlcude;
+			};
+			name = Debug;
+		};
+		18BA741D1CDB2DD80039FF61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = /usr/inlcude;
+			};
+			name = Release;
+		};
+		18BA741F1CDB2DD80039FF61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = /usr/include;
+			};
+			name = Debug;
+		};
+		18BA74201CDB2DD80039FF61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = /usr/include;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18BA74121CDB2DD80039FF61 /* Build configuration list for PBXProject "GameRoom" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18BA741C1CDB2DD80039FF61 /* Debug */,
+				18BA741D1CDB2DD80039FF61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18BA741E1CDB2DD80039FF61 /* Build configuration list for PBXNativeTarget "GameRoom" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18BA741F1CDB2DD80039FF61 /* Debug */,
+				18BA74201CDB2DD80039FF61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18BA740F1CDB2DD80039FF61 /* Project object */;
+}
