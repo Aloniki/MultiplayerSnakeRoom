@@ -14,6 +14,14 @@ void* sendSignToAllExceptOne(void* arg){
     pthread_exit(0);
 }
 
+void* sendSignToServer(void* arg){
+    auto pthis = (IBRoomClientHandler*)arg;
+    auto sender = Sender::getSender();
+    
+    sender->send(R2SSignal::UPDATED, RoomManager::getRoomManager()->getRoomInfo());
+    pthread_exit(0);
+}
+
 void IBRoomClientHandler::sendToAll(){
     auto vector = this->RM->getPlayerStatusList();
     for (auto itor = vector->begin(); itor != vector->end(); itor++) {
@@ -45,6 +53,8 @@ void IBRoomClientHandler::handle(){
                         
                         auto roomInfo = this->RM->getRoomInfo();
                         roomInfo->setCurrentPlayers(this->RM->getPlayerStatusList()->size());
+                        
+                        
                         
                         std::string jPlayerList;
                         JsonManager::PlayerStatusListToJson(this->RM->getPlayerStatusList(), jPlayerList);
@@ -94,12 +104,16 @@ void IBRoomClientHandler::handle(){
                         std::cout<<"player is prepared!! Update info:"<<updateSignal<<std::endl;
                         FullWrite(this->connectfd, updateSignal);
 
-                        pthread_t tid;
-                        pthread_attr_t attr;
-                        pthread_attr_init(&attr);
-                        pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-                        pthread_create(&tid, &attr, sendSignToAllExceptOne, this);
-                        pthread_attr_destroy(&attr);
+                        pthread_t tidToAll, tidToServer;
+                        pthread_attr_t attrToAll, attrToServer;
+                        pthread_attr_init(&attrToAll);
+                        pthread_attr_init(&attrToServer);
+                        pthread_attr_setdetachstate(&attrToAll, PTHREAD_CREATE_DETACHED);
+                        pthread_attr_setdetachstate(&attrToServer, PTHREAD_CREATE_DETACHED);
+                        pthread_create(&tidToAll, &attrToAll, sendSignToAllExceptOne, this);
+                        pthread_create(&tidToServer, &attrToServer, sendSignToServer, this);
+                        pthread_attr_destroy(&attrToAll);
+                        pthread_attr_destroy(&attrToServer);
 //                        if (this->RM->isReady()) {
 //                            this->RM->startGame();
 //                        }

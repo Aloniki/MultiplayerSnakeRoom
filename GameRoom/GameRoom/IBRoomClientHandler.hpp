@@ -11,6 +11,7 @@
 
 #include "Handler.hpp"
 #include "RoomManager.hpp"
+#include "Sender.hpp"
 
 class IBRoomClientHandler : Handler {
     RoomManager* RM;

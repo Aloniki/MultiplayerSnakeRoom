@@ -55,6 +55,8 @@ void init(const char* argv[]){
     sender = Sender::getSender();
     std::cout<<"sent created signal now"<<std::endl;
     sender->send(R2SSignal::CREATED, roomManager->getRoomInfo());
+    
+    sender->closeSender();
 }
 
 /**

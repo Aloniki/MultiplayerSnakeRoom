@@ -27,8 +27,8 @@
 //an unique port for each room that used to interact with client
 static in_port_t IWCLIENTPORT;
 
-#define ServIPAddr "172.20.10.2"
-#define RoomIPAddr "172.20.10.2"
+#define ServIPAddr "127.0.0.1"
+#define RoomIPAddr "127.0.0.1"
 #define IBSCPort 9997
 #define IBSRPort 9998
 #define IBCRPort IWCLIENTPORT

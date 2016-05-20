@@ -37,6 +37,7 @@ protected:
 public:
     static Sender* getSender();        //get static instance
     bool send(R2SSignal, void*);   //send signal & data to the server
+    void closeSender();
 };
 
 #endif /* Sender_hpp */

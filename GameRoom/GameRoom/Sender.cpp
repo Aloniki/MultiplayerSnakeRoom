@@ -92,6 +92,7 @@ bool Sender::send(R2SSignal signal, void* data){
             auto roomInfo = (RoomInfo*)data;
             JsonManager::RoomInfoToJson(roomInfo, jri);
             packet = DataPacketProtocol::Pack(ROOMROLE, R2SSignal::UPDATED, &jri);
+            std::cout<<"I'm going to inform the server to update room info!"<<std::endl;
             break;
         }
             
@@ -107,6 +108,10 @@ bool Sender::send(R2SSignal signal, void* data){
     return false;
 }
 
+
+void Sender::closeSender(){
+    close(this->sockfd);
+}
 
 
 
