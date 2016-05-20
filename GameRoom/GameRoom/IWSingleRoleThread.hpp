@@ -15,7 +15,7 @@
 #include <queue>
 #include <pthread.h>
 #include "Receiver.hpp"
-#include "Handler.hpp"
+#include "IBRoomClientHandler.hpp"
 #include "Sender.hpp"
 
 /// this class defines a thread to interact with roles
@@ -35,6 +35,8 @@ protected:
     Handler* handler;
     Sender* sender;
     
+    
+    
 public:
     IWSingleRoleThread(int fd, int iwRole){     //structor
         this->connectfd = fd;
@@ -43,16 +45,8 @@ public:
         packetQueue = new std::queue<DataPacket>();
         
         receiver = new Receiver(this->connectfd, this->packetQueue);
-        
-        //define using handler basing on interacting role
-        switch (iwRole) {
-            case CLIENTROLE:
-                break;
-            case SERVERROLE:
-                break;
-            default:
-                break;
-        }
+        handler = (Handler*)new IBRoomClientHandler(this->connectfd, this->packetQueue);
+        sender = Sender::getSender();
     }
     ~IWSingleRoleThread(){      //destructor
         delete packetQueue;

@@ -12,15 +12,20 @@
 #include "JsonManager.hpp"
 #include "ServerDaemon.hpp"
 #include "Sender.hpp"
+#include "RoomManager.hpp"
+#include "PortManager.hpp"
 
 #define SELFROLE ROOMROLE
 
 ServerDaemon* iwClientServerDaemon;     //a server dameon that is interacting with client
-ServerDaemon* iwServerClientDaemon;       //a client dameon that is interacting with server
+
+Sender* sender = Sender::getSender();
+
+RoomManager* roomManager = RoomManager::getRoomManager();
 
 //interaction thread IDs
 pthread_t tidIWClient;
-pthread_t tidIWServer;
+pthread_t tidDestory;
    
 /**
  Initialize server daemons
@@ -28,12 +33,28 @@ pthread_t tidIWServer;
  - returns: void
  */
 void init(const char* argv[]){
-    IWCLIENTPORT = atoi(argv[1]); //get an unique port from startup args
-    std::cout<<"port:"<<IBCRPort<<std::endl;
-    iwClientServerDaemon = new ServerDaemon(CLIENTROLE);
-    iwServerClientDaemon = new ServerDaemon(SERVERROLE);
-    auto sender = Sender::getSender();
-    sender->send(R2SSignal::CREATED);
+    IWCLIENTPORT = PortManager::getAvailablePort(); //get an available port
+    std::cout<<"get room info now"<<std::endl;
+    auto roomInfo = roomManager->getRoomInfo();  //get room info instance
+    std::cout<<"set room id now"<<std::endl;
+    roomInfo->setRoomID(atoi(argv[1]));
+    std::cout<<"set room ip now"<<std::endl;
+    roomInfo->setRoomIP(RoomIPAddr);
+    std::cout<<"set room port now"<<std::endl;
+    roomInfo->setRoomPort(IBCRPort);
+    std::cout<<"set room name now"<<std::endl;
+    roomInfo->setRoomName(argv[2]);         //set the host name
+    std::cout<<"set room max players now"<<std::endl;
+    roomInfo->setMaxPlayers(atoi(argv[3])); //set the maximum number of players
+    std::cout<<"new R2C daemon now"<<std::endl;
+    
+    iwClientServerDaemon = new ServerDaemon(CLIENTROLE);    //run interacting daemon
+    
+    std::cout<<"get sender now"<<std::endl;
+    //send a created signal to server
+    sender = Sender::getSender();
+    std::cout<<"sent created signal now"<<std::endl;
+    sender->send(R2SSignal::CREATED, roomManager->getRoomInfo());
 }
 
 /**
@@ -44,22 +65,26 @@ void init(const char* argv[]){
  *  @return void
  */
 void* interactWithClient(void* arg){
-//    iwClientServerDaemon->run();
+    iwClientServerDaemon->run();
     pthread_exit(NULL);
 }
-
 /**
- *  run a new server daemon to interact with server
+ *  run a thread to destory this room if no one joins this room within a certain period
  *
  *  @param arg void
  *
  *  @return void
  */
-void* interactWithServer(void* arg){
-    iwServerClientDaemon->run();
+void* selfDestory(void* arg){
+//    sleep(10);
+//    if (0 == roomManager->getRoomInfo()->getCurrentPlayers()) {
+//        auto id = roomManager->getRoomInfo()->getRoomID();
+//        sender->send(R2SSignal::CLOSED, &id);
+//        pthread_kill(tidIWClient, SIGKILL);
+//        exit(0);
+//    }
     pthread_exit(NULL);
 }
-
 
 /**
  *  main logic method
@@ -72,12 +97,14 @@ void* interactWithServer(void* arg){
 int main(int argc, const char * argv[]) {
     //initialize
     init(argv);
-    //create new threads to run server daemons
+    //create new thread to run server daemons
     pthread_create(&tidIWClient, NULL, interactWithClient, NULL);
-    pthread_create(&tidIWServer, NULL, interactWithServer, NULL);
-    //waiting for these threads
+    //create a timer to destory
+    pthread_create(&tidDestory, NULL, selfDestory, NULL);
+    //waiting for this threads
+    pthread_join(tidDestory, NULL);
     pthread_join(tidIWClient, NULL);
-    pthread_join(tidIWServer, NULL);
     //end this program
+    
     exit(0);
 }

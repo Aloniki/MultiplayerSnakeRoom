@@ -7,6 +7,7 @@
 //
 
 #include "Sender.hpp"
+#include <random>
 
 Sender* Sender::sender;
 
@@ -47,38 +48,64 @@ bool Sender::init(){
 Sender* Sender::getSender(){
     if (NULL == sender) {
         sender = new Sender();
-        init:
         if (false == sender->init()) {
             std::cout<<"init fails, try again!"<<std::endl;
-            goto init;
         }
     }
     return sender;
 }
 
-bool Sender::send(R2SSignal singal){
-    auto packet = DataPacketProtocol::Pack(ROOMROLE, singal);
-    auto c_packet = packet.c_str();
-    auto length = strlen(c_packet);
-    auto wCount = 0;
-    auto rCount = length;
-    ssize_t n = 0;
-    while (true) {
-        n = write(this->sockfd, c_packet, rCount);
-        if (-1 == n) {
-            std::cout<<"error:"<<errno<<std::endl;
-            return false;
-        }
-        wCount += n;
-        if (wCount >= length) {
+bool Sender::send(R2SSignal signal, void* data){
+    std::string packet;
+    switch (signal) {
+        case R2SSignal::CLOSED:{
+            std::stringstream ss;
+            ss<<*((int*)data);
+            auto sid = ss.str();
+            
+            packet = DataPacketProtocol::Pack(ROOMROLE, R2SSignal::CLOSED, &sid);
+            std::cout<<"I'm dying now!"<<std::endl;
             break;
         }
-        c_packet += wCount;
-        rCount -= wCount;
+        case R2SSignal::CREATED:{
+            std::string jri = "";
+            auto roomInfo = (RoomInfo*)data;
+            JsonManager::RoomInfoToJson(roomInfo, jri);
+            packet = DataPacketProtocol::Pack(ROOMROLE, R2SSignal::CREATED, &jri);
+            std::cout<<"I'm created now!"<<std::endl;
+            std::cout<<jri<<std::endl;
+            
+            
+            break;
+        }
+        case R2SSignal::STARTED:{
+            std::stringstream ss;
+            ss<<*((int*)data);
+            auto sid = ss.str();
+            
+            packet = DataPacketProtocol::Pack(ROOMROLE, R2SSignal::STARTED, &sid);
+            std::cout<<"I'm going to start now!"<<std::endl;
+            break;
+        }
+        case R2SSignal::UPDATED:{
+            std::string jri = "";
+            auto roomInfo = (RoomInfo*)data;
+            JsonManager::RoomInfoToJson(roomInfo, jri);
+            packet = DataPacketProtocol::Pack(ROOMROLE, R2SSignal::UPDATED, &jri);
+            break;
+        }
+            
+        default:
+            break;
     }
-    return true;
+    
+    if (true == FullWrite(this->sockfd, packet)) {
+        std::cout<<"Full write successed"<<std::endl;
+        return true;
+    }
+    std::cout<<"Full write failed!"<<std::endl;
+    return false;
 }
-
 
 
 

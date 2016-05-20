@@ -11,32 +11,66 @@
 
 typedef int roomID_t;
 
-#include <string>
-#include <cstring>
-#include "rapidjson/prettywriter.h"
-#include "rapidjson/stringbuffer.h"
-#include "rapidjson/schema.h"
+#include <iostream>
+
+/**
+ *  the states of room
+ */
+enum RoomState{
+    R_PREPARING =       1,
+    R_GAMING    =       2,
+};
 
 class RoomInfo{
 private:
     roomID_t roomID;
-    std::string roomAddr;
-    std::string roomHoster;
+    std::string roomIP;
+    in_port_t   roomPort;
+    std::string roomName;
+    std::string roomHost;
+    RoomState roomState;
+    size_t  maxPlayers;
+    size_t  currentPlayers;
     
 public:
-    RoomInfo(int id,std::string addr, std::string hoster){
+    RoomInfo(){
+        this->roomID = 0;
+        this->roomIP = "None";
+        this->roomPort = 0;
+        this->roomState = RoomState::R_PREPARING;
+        this->roomName = "room";
+        this->roomHost = "None";
+        this->maxPlayers = 2;
+        this->currentPlayers = 0;
+    };
+    RoomInfo(int id,std::string ip, in_port_t port, std::string name, std::string host, size_t maximum){
         this->roomID = id;
-        this->roomAddr = addr;
-        this->roomHoster = hoster;
+        this->roomIP = ip;
+        this->roomPort = port;
+        this->roomState = RoomState::R_PREPARING;
+        this->roomName = name;
+        this->roomHost = host;
+        this->maxPlayers = maximum;
+        this->currentPlayers = 0;
     }
     
     roomID_t getRoomID();
-    std::string getRoomAddr();
-    std::string getRoomHoster();
+    std::string getRoomIP();
+    in_port_t getRoomPort();
+    std::string getRoomName();
+    std::string getRoomHost();
+    RoomState getRoomState();
+    size_t getMaxplayers();
+    size_t getCurrentPlayers();
     
     void setRoomID(roomID_t id);
-    void setRoomAddr(std::string addr);
-    void setRoomHoster(std::string hoster);
+    void setRoomIP(std::string ip);
+    void setRoomPort(in_port_t);
+    void setRoomName(std::string name);
+    void setRoomHost(std::string hoster);
+    void setRoomState(RoomState);
+    void setMaxPlayers(size_t);
+    void setCurrentPlayers(size_t);
     void updateRoomInfo(RoomInfo*);
 };
 

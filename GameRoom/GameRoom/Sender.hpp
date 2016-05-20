@@ -14,6 +14,8 @@
 #include <pthread.h>
 #include <iostream>
 #include "GameHeaders.h"
+#include "RoomManager.hpp"
+#include "PortManager.hpp"
 
 /**
  * this sender is connected to server, it is a single instance.
@@ -34,7 +36,7 @@ protected:
     struct sockaddr_in      servaddr;
 public:
     static Sender* getSender();        //get static instance
-    bool send(R2SSignal);                //send signal to the server
+    bool send(R2SSignal, void*);   //send signal & data to the server
 };
 
 #endif /* Sender_hpp */

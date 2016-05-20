@@ -15,6 +15,7 @@
 #include <pthread.h>
 #include <vector>
 #include "IWSingleRoleThread.hpp"
+#include "PlayerStatus.hpp"
 
 /// ServerDaemon class
 class ServerDaemon {
@@ -37,6 +38,7 @@ protected:
 public:
     ServerDaemon(int iwRole){   //structor
         this->tidList = new std::vector<pthread_t>();
+        
         this->iwRole = iwRole;
         this->port = IBCRPort;
     }

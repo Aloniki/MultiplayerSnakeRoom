@@ -31,14 +31,28 @@
 #define ASCIINUMOFFSET 48
 
 /**
- Operation Types
+ *  the states of player which is in room
+ */
+enum RoomPlayerRole{
+    RR_HOST         = 1,
+    RR_GUEST        = 2,
+};
+
+/**
+ *  client to server signal types
  */
 enum C2SSignal{
-    INVALID     =  -1,
-    EXIT        =   0,
-    REQUIRE     =   1,
-    CREATE      =   2,
-    JOIN        =   3,
+    C2S_INVALID     =  -1,
+    C2S_EXIT        =   0,
+    C2S_REQUIRE     =   1,
+    C2S_CREATE      =   2,
+};
+/**
+ *  server to client signal types
+ */
+enum S2CSignal{
+    S2C_REQUIRED = 1,
+    S2C_CREATED  = 2,
 };
 /**
  *  room to server signal types
@@ -48,6 +62,25 @@ enum R2SSignal{
     CREATED     =   1,
     UPDATED     =   2,
     STARTED     =   3,
+};
+/**
+ *  room to server signal types
+ */
+enum C2RSignal{
+    C2R_LEAVE       =   0,
+    C2R_JOIN        =   1,
+    C2R_PREPARE     =   2,
+    C2R_UNPREPARE   =   3,
+};
+/**
+ *  room to client signal types
+ */
+enum R2CSignal{
+    R2C_JOINED      = 1,
+    R2C_PREPARED    = 2,
+    R2C_UNPREPARED  = 3,
+    R2C_GAMEWILLSTART = 4,
+    R2C_UPDATE      = 5,
 };
 /**
  *  Use to record the role, type and raw string from a data packet

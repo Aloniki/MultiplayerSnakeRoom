@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		183A9A801CE06717009253B5 /* PortManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 183A9A7E1CE06717009253B5 /* PortManager.cpp */; };
+		1853B5601CDD88C700026F4E /* IBRoomClientHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1853B55E1CDD88C700026F4E /* IBRoomClientHandler.cpp */; };
+		1853B5631CDD8BBF00026F4E /* PlayerStatus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1853B5611CDD8BBF00026F4E /* PlayerStatus.cpp */; };
+		1853B5661CDD930400026F4E /* RoomManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1853B5641CDD930400026F4E /* RoomManager.cpp */; };
+		186F60781CEC1D9000D0760B /* RoomSetting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 186F60761CEC1D9000D0760B /* RoomSetting.cpp */; };
 		18BA741B1CDB2DD80039FF61 /* MainRoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA741A1CDB2DD80039FF61 /* MainRoom.cpp */; };
 		18BA745B1CDB301C0039FF61 /* DataPacketProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA74491CDB301B0039FF61 /* DataPacketProtocol.cpp */; };
 		18BA745C1CDB301C0039FF61 /* Handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA744C1CDB301B0039FF61 /* Handler.cpp */; };
@@ -16,6 +21,7 @@
 		18BA74621CDB301C0039FF61 /* RoomInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA74571CDB301C0039FF61 /* RoomInfo.cpp */; };
 		18BA74631CDB301C0039FF61 /* ServerDaemon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18BA74591CDB301C0039FF61 /* ServerDaemon.cpp */; };
 		18C0C2BB1CDC468E0067D65B /* Sender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C0C2B91CDC468E0067D65B /* Sender.cpp */; };
+		18CDC3F41CE1884A00615F81 /* FullWrite.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CDC3F31CE1884A00615F81 /* FullWrite.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,11 +37,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		183A9A7E1CE06717009253B5 /* PortManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PortManager.cpp; sourceTree = "<group>"; };
+		183A9A7F1CE06717009253B5 /* PortManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PortManager.hpp; sourceTree = "<group>"; };
+		1853B55E1CDD88C700026F4E /* IBRoomClientHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IBRoomClientHandler.cpp; sourceTree = "<group>"; };
+		1853B55F1CDD88C700026F4E /* IBRoomClientHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IBRoomClientHandler.hpp; sourceTree = "<group>"; };
+		1853B5611CDD8BBF00026F4E /* PlayerStatus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerStatus.cpp; sourceTree = "<group>"; };
+		1853B5621CDD8BBF00026F4E /* PlayerStatus.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerStatus.hpp; sourceTree = "<group>"; };
+		1853B5641CDD930400026F4E /* RoomManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoomManager.cpp; sourceTree = "<group>"; };
+		1853B5651CDD930400026F4E /* RoomManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RoomManager.hpp; sourceTree = "<group>"; };
+		186F60761CEC1D9000D0760B /* RoomSetting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoomSetting.cpp; sourceTree = "<group>"; };
+		186F60771CEC1D9000D0760B /* RoomSetting.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RoomSetting.hpp; sourceTree = "<group>"; };
 		18BA74171CDB2DD80039FF61 /* GameRoom */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameRoom; sourceTree = BUILT_PRODUCTS_DIR; };
 		18BA741A1CDB2DD80039FF61 /* MainRoom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MainRoom.cpp; sourceTree = "<group>"; };
 		18BA74491CDB301B0039FF61 /* DataPacketProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataPacketProtocol.cpp; sourceTree = "<group>"; };
 		18BA744A1CDB301B0039FF61 /* DataPacketProtocol.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DataPacketProtocol.hpp; sourceTree = "<group>"; };
-		18BA744B1CDB301B0039FF61 /* GameHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameHeaders.h; sourceTree = "<group>"; };
+		18BA744B1CDB301B0039FF61 /* GameHeaders.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = GameHeaders.h; sourceTree = "<group>"; };
 		18BA744C1CDB301B0039FF61 /* Handler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Handler.cpp; sourceTree = "<group>"; };
 		18BA744D1CDB301B0039FF61 /* Handler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Handler.hpp; sourceTree = "<group>"; };
 		18BA744E1CDB301B0039FF61 /* IWSingleRoleThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IWSingleRoleThread.cpp; sourceTree = "<group>"; };
@@ -50,6 +66,7 @@
 		18BA745A1CDB301C0039FF61 /* ServerDaemon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ServerDaemon.hpp; sourceTree = "<group>"; };
 		18C0C2B91CDC468E0067D65B /* Sender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sender.cpp; sourceTree = "<group>"; };
 		18C0C2BA1CDC468E0067D65B /* Sender.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sender.hpp; sourceTree = "<group>"; };
+		18CDC3F31CE1884A00615F81 /* FullWrite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FullWrite.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +100,12 @@
 			isa = PBXGroup;
 			children = (
 				18BA744B1CDB301B0039FF61 /* GameHeaders.h */,
-				18C0C2B81CDC46810067D65B /* Sender */,
 				18BA741A1CDB2DD80039FF61 /* MainRoom.cpp */,
+				18C0C2B81CDC46810067D65B /* Sender */,
 				18BA74661CDB310D0039FF61 /* Daemon */,
 				18BA74641CDB30380039FF61 /* ProtocolManagers */,
 				18C0C2B71CDC465C0067D65B /* Entity */,
+				18CDC3F21CE187E600615F81 /* Algorithm */,
 			);
 			path = GameRoom;
 			sourceTree = "<group>";
@@ -99,6 +117,8 @@
 				18BA744A1CDB301B0039FF61 /* DataPacketProtocol.hpp */,
 				18BA74501CDB301B0039FF61 /* JsonManager.cpp */,
 				18BA74511CDB301B0039FF61 /* JsonManager.hpp */,
+				183A9A7E1CE06717009253B5 /* PortManager.cpp */,
+				183A9A7F1CE06717009253B5 /* PortManager.hpp */,
 			);
 			name = ProtocolManagers;
 			sourceTree = "<group>";
@@ -111,6 +131,8 @@
 				18BA74671CDB31250039FF61 /* IWSingleRoleThread */,
 				18BA744E1CDB301B0039FF61 /* IWSingleRoleThread.cpp */,
 				18BA744F1CDB301B0039FF61 /* IWSingleRoleThread.hpp */,
+				1853B5641CDD930400026F4E /* RoomManager.cpp */,
+				1853B5651CDD930400026F4E /* RoomManager.hpp */,
 				18BA74691CDB31410039FF61 /* Receiver */,
 				18BA74681CDB31390039FF61 /* Handler */,
 			);
@@ -129,6 +151,8 @@
 			children = (
 				18BA744C1CDB301B0039FF61 /* Handler.cpp */,
 				18BA744D1CDB301B0039FF61 /* Handler.hpp */,
+				1853B55E1CDD88C700026F4E /* IBRoomClientHandler.cpp */,
+				1853B55F1CDD88C700026F4E /* IBRoomClientHandler.hpp */,
 			);
 			name = Handler;
 			sourceTree = "<group>";
@@ -145,8 +169,12 @@
 		18C0C2B71CDC465C0067D65B /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				186F60761CEC1D9000D0760B /* RoomSetting.cpp */,
+				186F60771CEC1D9000D0760B /* RoomSetting.hpp */,
 				18BA74571CDB301C0039FF61 /* RoomInfo.cpp */,
 				18BA74581CDB301C0039FF61 /* RoomInfo.hpp */,
+				1853B5611CDD8BBF00026F4E /* PlayerStatus.cpp */,
+				1853B5621CDD8BBF00026F4E /* PlayerStatus.hpp */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -158,6 +186,14 @@
 				18C0C2BA1CDC468E0067D65B /* Sender.hpp */,
 			);
 			name = Sender;
+			sourceTree = "<group>";
+		};
+		18CDC3F21CE187E600615F81 /* Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				18CDC3F31CE1884A00615F81 /* FullWrite.hpp */,
+			);
+			name = Algorithm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,12 +253,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				18BA741B1CDB2DD80039FF61 /* MainRoom.cpp in Sources */,
+				18CDC3F41CE1884A00615F81 /* FullWrite.hpp in Sources */,
 				18BA745E1CDB301C0039FF61 /* JsonManager.cpp in Sources */,
+				186F60781CEC1D9000D0760B /* RoomSetting.cpp in Sources */,
 				18BA74631CDB301C0039FF61 /* ServerDaemon.cpp in Sources */,
+				1853B5601CDD88C700026F4E /* IBRoomClientHandler.cpp in Sources */,
+				1853B5661CDD930400026F4E /* RoomManager.cpp in Sources */,
+				183A9A801CE06717009253B5 /* PortManager.cpp in Sources */,
 				18BA74611CDB301C0039FF61 /* Receiver.cpp in Sources */,
 				18C0C2BB1CDC468E0067D65B /* Sender.cpp in Sources */,
 				18BA745C1CDB301C0039FF61 /* Handler.cpp in Sources */,
 				18BA74621CDB301C0039FF61 /* RoomInfo.cpp in Sources */,
+				1853B5631CDD8BBF00026F4E /* PlayerStatus.cpp in Sources */,
 				18BA745B1CDB301C0039FF61 /* DataPacketProtocol.cpp in Sources */,
 				18BA745D1CDB301C0039FF61 /* IWSingleRoleThread.cpp in Sources */,
 			);

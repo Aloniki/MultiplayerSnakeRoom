@@ -8,6 +8,8 @@
 
 #include "ServerDaemon.hpp"
 
+
+
 /**
  *  thread recall wrapper, it is used to call the true handle method
  *
@@ -56,7 +58,11 @@ bool ServerDaemon::initDaemon(){
  *  run daemon. set up sokcet connection and creat new handle threads
  */
 void ServerDaemon::run(){
-    initDaemon();
+    if (false == initDaemon()){
+        std::cout<<"init error! errno:"<<errno;
+        fflush(stdout);
+        return;
+    }
     for (; ; ) {
         this->clilen = sizeof(this->cliaddr);
         this->connfd = accept(this->listenfd, (struct sockaddr*)&(this->cliaddr), &(this->clilen));

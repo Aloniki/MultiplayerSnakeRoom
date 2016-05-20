@@ -22,7 +22,6 @@ using namespace std;
 string DataPacketProtocol::Pack(int role, int type, std::string *rawStr){
     if (NULL != rawStr) {
         size_t length = rawStr->length() + PACKETHEADLENGTH;
-        
         stringstream ss;
         //add the formal DATALENGTH part
         ss<<setw(DATALENGTH)<<setfill('0')<<length;

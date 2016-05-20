@@ -36,6 +36,8 @@ void IWSingleRoleThread::run(){
     
     pthread_join(tidReceiver, NULL);
     pthread_join(tidHandler, NULL);
+    
+    std::cout<<"Room: a thread died!"<<std::endl;
 }
 
 /**
