@@ -21,23 +21,10 @@
  * this sender is connected to server, it is a single instance.
  */
 class Sender {
-protected:
-    static Sender* sender;      //single instance
-    Sender();                   //constructor
-    ~Sender(){
-        delete sender;
-    };                //destructor
-    
-    bool init();                //initialize connection
-    
-    bool isConnected;           //connection state flag
-    
-    int                     sockfd;
-    struct sockaddr_in      servaddr;
 public:
-    static Sender* getSender();        //get static instance
-    bool send(R2SSignal, void*);   //send signal & data to the server
-    void closeSender();
+    static int connectToRole(int role, int port);
+    static bool send(int role, int socketfd, int signal, void*data);
+    static void disconnectSocket(int socketfd);
 };
 
 #endif /* Sender_hpp */

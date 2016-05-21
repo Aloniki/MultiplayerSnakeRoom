@@ -21,7 +21,6 @@ public:
         this->RM = RoomManager::getRoomManager();
     }
     void handle();      //handle with clients
-    void sendToAll();
 };
 
 #endif /* IBRoomClientHandler_hpp */

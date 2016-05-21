@@ -19,7 +19,6 @@
 
 ServerDaemon* iwClientServerDaemon;     //a server dameon that is interacting with client
 
-Sender* sender = Sender::getSender();
 
 RoomManager* roomManager = RoomManager::getRoomManager();
 
@@ -50,13 +49,12 @@ void init(const char* argv[]){
     
     iwClientServerDaemon = new ServerDaemon(CLIENTROLE);    //run interacting daemon
     
-    std::cout<<"get sender now"<<std::endl;
-    //send a created signal to server
-    sender = Sender::getSender();
     std::cout<<"sent created signal now"<<std::endl;
-    sender->send(R2SSignal::CREATED, roomManager->getRoomInfo());
+    int socketfd = Sender::connectToRole(SERVERROLE, IBSRPort);
+    if (-1 != socketfd) {
+        Sender::send(SERVERROLE, socketfd, R2SSignal::CREATED, roomManager->getRoomInfo());
+    }
     
-    sender->closeSender();
 }
 
 /**

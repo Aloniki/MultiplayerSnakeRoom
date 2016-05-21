@@ -33,7 +33,6 @@ protected:
     
     Receiver* receiver;
     Handler* handler;
-    Sender* sender;
     
     
     
@@ -46,7 +45,6 @@ public:
         
         receiver = new Receiver(this->connectfd, this->packetQueue);
         handler = (Handler*)new IBRoomClientHandler(this->connectfd, this->packetQueue);
-        sender = Sender::getSender();
     }
     ~IWSingleRoleThread(){      //destructor
         delete packetQueue;

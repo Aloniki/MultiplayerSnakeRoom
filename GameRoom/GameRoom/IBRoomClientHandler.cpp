@@ -8,33 +8,68 @@
 
 #include "IBRoomClientHandler.hpp"
 
-void* sendSignToAllExceptOne(void* arg){
-    auto pthis = (IBRoomClientHandler*)arg;
-    pthis->sendToAll();
-    pthread_exit(0);
+typedef void* (*tcb)(void*);
+
+void runDetachedThread(tcb method, void* arg){
+    pthread_t tid;
+    pthread_attr_t attr;
+    pthread_attr_init(&attr);
+    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+    pthread_create(&tid, &attr, method, arg);
+    pthread_attr_destroy(&attr);
 }
 
-void* sendSignToServer(void* arg){
-    auto pthis = (IBRoomClientHandler*)arg;
-    auto sender = Sender::getSender();
-    
-    sender->send(R2SSignal::UPDATED, RoomManager::getRoomManager()->getRoomInfo());
-    pthread_exit(0);
-}
-
-void IBRoomClientHandler::sendToAll(){
-    auto vector = this->RM->getPlayerStatusList();
+void* sendUpdatedSignToAllPlayers(void* arg){
+    auto vector = RoomManager::getRoomManager()->getPlayerStatusList();
     for (auto itor = vector->begin(); itor != vector->end(); itor++) {
         int descriptor = (int)itor->getPlayerDescriptor();
         
         std::string jPlayerList;
         JsonManager::PlayerStatusListToJson(RoomManager::getRoomManager()->getPlayerStatusList(), jPlayerList);
-        auto updateSignal = DataPacketProtocol::Pack(SERVERROLE, R2CSignal::R2C_UPDATE, &jPlayerList);
+        auto updateSignal = DataPacketProtocol::Pack(ROOMROLE, R2CSignal::R2C_UPDATE, &jPlayerList);
         std::cout<<"send to all update:"<<updateSignal<<std::endl;
         FullWrite(descriptor, updateSignal);
-
     }
+    pthread_exit(0);
 }
+
+void* askAllPlayersToStart(void* arg){
+    auto vector = RoomManager::getRoomManager()->getPlayerStatusList();
+    for (auto itor = vector->begin(); itor != vector->end(); itor++) {
+        int descriptor = (int)itor->getPlayerDescriptor();
+        auto startSignal = DataPacketProtocol::Pack(ROOMROLE, R2CSignal::R2C_GAMEWILLSTART);
+        std::cout<<"all player will start! :"<<startSignal<<std::endl;
+        FullWrite(descriptor, startSignal);
+    }
+    pthread_exit(0);
+}
+
+void* sendSignToServer(void* arg){
+    int socketfd = Sender::connectToRole(SERVERROLE, IBSRPort);
+    
+    auto type = *((int*)arg);
+    switch (type) {
+        case R2SSignal::CLOSED: {
+            
+            break;
+        }
+        case R2SSignal::UPDATED: {
+            Sender::send(SERVERROLE, socketfd, R2SSignal::UPDATED, RoomManager::getRoomManager()->getRoomInfo());
+            break;
+        }
+        case R2SSignal::STARTED: {
+            
+            break;
+        }
+        default:
+            break;
+    }
+    
+    Sender::disconnectSocket(socketfd);
+    delete (int*)arg;
+    pthread_exit(0);
+}
+
 
 void IBRoomClientHandler::handle(){
     while (true) {
@@ -61,12 +96,10 @@ void IBRoomClientHandler::handle(){
 
                         std::cout<<"player is removed! Update info:"<<jPlayerList<<std::endl;
                         
-                        pthread_t tid;
-                        pthread_attr_t attr;
-                        pthread_attr_init(&attr);
-                        pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-                        pthread_create(&tid, &attr, sendSignToAllExceptOne, this);
-                        pthread_attr_destroy(&attr);
+                        runDetachedThread(sendUpdatedSignToAllPlayers, this);
+                        int* type = new int(R2SSignal::UPDATED);
+                        runDetachedThread(sendSignToServer, type);
+                        
                         goto stop;
                     }
                     case C2RSignal::C2R_JOIN:{
@@ -86,12 +119,9 @@ void IBRoomClientHandler::handle(){
                         std::cout<<"joined signal:"<<joinedSignal<<std::endl;
                         FullWrite(this->connectfd, joinedSignal);
                         
-                        pthread_t tid;
-                        pthread_attr_t attr;
-                        pthread_attr_init(&attr);
-                        pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-                        pthread_create(&tid, &attr, sendSignToAllExceptOne, this);
-                        pthread_attr_destroy(&attr);
+                        runDetachedThread(sendUpdatedSignToAllPlayers, this);
+                        int* type = new int(R2SSignal::UPDATED);
+                        runDetachedThread(sendSignToServer, type);
                         break;
                     }
                     case C2RSignal::C2R_PREPARE:{
@@ -104,19 +134,13 @@ void IBRoomClientHandler::handle(){
                         std::cout<<"player is prepared!! Update info:"<<updateSignal<<std::endl;
                         FullWrite(this->connectfd, updateSignal);
 
-                        pthread_t tidToAll, tidToServer;
-                        pthread_attr_t attrToAll, attrToServer;
-                        pthread_attr_init(&attrToAll);
-                        pthread_attr_init(&attrToServer);
-                        pthread_attr_setdetachstate(&attrToAll, PTHREAD_CREATE_DETACHED);
-                        pthread_attr_setdetachstate(&attrToServer, PTHREAD_CREATE_DETACHED);
-                        pthread_create(&tidToAll, &attrToAll, sendSignToAllExceptOne, this);
-                        pthread_create(&tidToServer, &attrToServer, sendSignToServer, this);
-                        pthread_attr_destroy(&attrToAll);
-                        pthread_attr_destroy(&attrToServer);
-//                        if (this->RM->isReady()) {
-//                            this->RM->startGame();
-//                        }
+                        runDetachedThread(sendUpdatedSignToAllPlayers, this);
+                        
+                        if (this->RM->isReady()) {
+                            runDetachedThread(askAllPlayersToStart, this);
+                            int* type = new int(R2SSignal::UPDATED);
+                            runDetachedThread(sendSignToServer, type);
+                        }
                         break;
                     }
                     case C2RSignal::C2R_UNPREPARE:{
@@ -129,12 +153,7 @@ void IBRoomClientHandler::handle(){
                         std::cout<<"player is unprepared!! Update info:"<<updateSignal<<std::endl;
                         FullWrite(this->connectfd, updateSignal);
                         
-                        pthread_t tid;
-                        pthread_attr_t attr;
-                        pthread_attr_init(&attr);
-                        pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-                        pthread_create(&tid, &attr, sendSignToAllExceptOne, this);
-                        pthread_attr_destroy(&attr);
+                        runDetachedThread(sendUpdatedSignToAllPlayers, this);
                         
                         break;
                     }
