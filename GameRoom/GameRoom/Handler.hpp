@@ -13,6 +13,7 @@
 #include <queue>
 #include <iostream>
 #include <unistd.h>
+#include <pthread.h>
 
 /*
  this is class define the basic hanlder, specific handlers can inherit this class and over write

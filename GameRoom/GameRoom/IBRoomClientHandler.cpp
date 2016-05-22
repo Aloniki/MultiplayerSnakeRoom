@@ -10,6 +10,9 @@
 
 typedef void* (*tcb)(void*);
 
+bool IBRoomClientHandler::isStarting;
+bool IBRoomClientHandler::isPlayerCanCanclePrepare;
+
 void runDetachedThread(tcb method, void* arg){
     pthread_t tid;
     pthread_attr_t attr;
@@ -34,6 +37,7 @@ void* sendUpdatedSignToAllPlayers(void* arg){
 }
 
 void* askAllPlayersToStart(void* arg){
+    auto pthis = (IBRoomClientHandler*)arg;
     auto vector = RoomManager::getRoomManager()->getPlayerStatusList();
     for (auto itor = vector->begin(); itor != vector->end(); itor++) {
         int descriptor = (int)itor->getPlayerDescriptor();
@@ -41,7 +45,66 @@ void* askAllPlayersToStart(void* arg){
         std::cout<<"all player will start! :"<<startSignal<<std::endl;
         FullWrite(descriptor, startSignal);
     }
+    int waitingTimes = 0;
+    while (true) {
+        if (IBRoomClientHandler::isStarting) {
+            sleep(1);
+            waitingTimes++;
+            if (3 == waitingTimes) {
+                IBRoomClientHandler::isPlayerCanCanclePrepare = false;
+                break;
+            }
+        }else{
+            IBRoomClientHandler::isPlayerCanCanclePrepare = true;
+            break;
+        }
+    }
     pthread_exit(0);
+}
+
+void* askAllPlayersToStop(void* arg){
+    auto pthis = (IBRoomClientHandler*)arg;
+    pthis->allowCanclePrepaer();
+    
+    auto vector = RoomManager::getRoomManager()->getPlayerStatusList();
+    for (auto itor = vector->begin(); itor != vector->end(); itor++) {
+        int descriptor = (int)itor->getPlayerDescriptor();
+        auto stopSignal = DataPacketProtocol::Pack(ROOMROLE, R2CSignal::R2C_GAMEWILLSTOP);
+        std::cout<<"all player will start! :"<<stopSignal<<std::endl;
+        FullWrite(descriptor, stopSignal);
+    }
+    IBRoomClientHandler::isPlayerCanCanclePrepare = true;
+    pthread_exit(0);
+}
+
+void IBRoomClientHandler::starting(){
+//    this->isStarting = true;
+}
+
+void IBRoomClientHandler::stopStarting(){
+//    this->isStarting = false;
+}
+
+bool IBRoomClientHandler::getIsStarting(){
+//    return this->isStarting;
+    return true;
+}
+
+void IBRoomClientHandler::forbitCanclePrepare(){
+//    pthread_mutex_lock(&(this->lock));
+//    this->isPlayerCanCanclePrepare = false;
+//    pthread_mutex_unlock(&(this->lock));
+}
+
+void IBRoomClientHandler::allowCanclePrepaer(){
+//    pthread_mutex_lock(&(this->lock));
+//    this->isPlayerCanCanclePrepare = true;
+//    pthread_mutex_unlock(&(this->lock));
+}
+
+bool IBRoomClientHandler::getPermissionOfCanclePrepare(){
+//    return this->isPlayerCanCanclePrepare;
+    return true;
 }
 
 void* sendSignToServer(void* arg){
@@ -137,6 +200,7 @@ void IBRoomClientHandler::handle(){
                         runDetachedThread(sendUpdatedSignToAllPlayers, this);
                         
                         if (this->RM->isReady()) {
+                            IBRoomClientHandler::isStarting = true;
                             runDetachedThread(askAllPlayersToStart, this);
                             int* type = new int(R2SSignal::UPDATED);
                             runDetachedThread(sendSignToServer, type);
@@ -144,16 +208,21 @@ void IBRoomClientHandler::handle(){
                         break;
                     }
                     case C2RSignal::C2R_UNPREPARE:{
-                        auto playerStatus =  this->RM->findPlayerByDescriptor(this->connectfd);
-                        playerStatus->playerState = PS_UNPREPARED;
-                        
-                        std::string jPlayerList;
-                        JsonManager::PlayerStatusListToJson(RoomManager::getRoomManager()->getPlayerStatusList(), jPlayerList);
-                        auto updateSignal = DataPacketProtocol::Pack(SERVERROLE, R2CSignal::R2C_UPDATE, &jPlayerList);
-                        std::cout<<"player is unprepared!! Update info:"<<updateSignal<<std::endl;
-                        FullWrite(this->connectfd, updateSignal);
-                        
-                        runDetachedThread(sendUpdatedSignToAllPlayers, this);
+                        if (IBRoomClientHandler::isPlayerCanCanclePrepare) {
+                            auto playerStatus =  this->RM->findPlayerByDescriptor(this->connectfd);
+                            playerStatus->playerState = PS_UNPREPARED;
+                            
+                            std::string jPlayerList;
+                            JsonManager::PlayerStatusListToJson(RoomManager::getRoomManager()->getPlayerStatusList(), jPlayerList);
+                            auto updateSignal = DataPacketProtocol::Pack(ROOMROLE, R2CSignal::R2C_UPDATE, &jPlayerList);
+                            std::cout<<"player is unprepared!! Update info:"<<updateSignal<<std::endl;
+                            FullWrite(this->connectfd, updateSignal);
+                            
+                            runDetachedThread(sendUpdatedSignToAllPlayers, this);
+                        }else{
+                            auto invalidSignal = DataPacketProtocol::Pack(ROOMROLE, R2CSignal::R2C_INVALID);
+                            std::cout<<"unprepare operation is invalid now:"<<invalidSignal<<std::endl;
+                        }
                         
                         break;
                     }

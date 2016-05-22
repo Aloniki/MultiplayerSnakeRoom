@@ -15,12 +15,30 @@
 
 class IBRoomClientHandler : Handler {
     RoomManager* RM;
+    
+   
 public:
+    
+    static bool isPlayerCanCanclePrepare;
+    static bool isStarting;
+    static bool isFirstInit;
+    
+    pthread_mutex_t lock;
+    
     //constructor
     IBRoomClientHandler(int fd, std::queue<DataPacket>* packetQueue) : Handler(fd, packetQueue){
         this->RM = RoomManager::getRoomManager();
+        this->isPlayerCanCanclePrepare = true;
     }
     void handle();      //handle with clients
+    
+    bool getIsStarting();
+    void stopStarting();
+    void starting();
+    
+    void forbitCanclePrepare();
+    void allowCanclePrepaer();
+    bool getPermissionOfCanclePrepare();
 };
 
 #endif /* IBRoomClientHandler_hpp */
